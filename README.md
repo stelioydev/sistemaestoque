@@ -1,5 +1,8 @@
 # Sistema Administrativo de Estoque
 
+O Documento oficial do Projeto pode ser encontrado no link a seguir:
+https://docs.google.com/document/d/16ZrPXURQfLCX1YMhJkyjJQRCDnOd6EhwkVabb6KKCJs/edit?usp=sharing
+
 ## Definição de Escopo
 
 ### 1. Mapeamento de Usuários
