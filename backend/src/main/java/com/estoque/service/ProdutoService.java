@@ -42,9 +42,10 @@ public class ProdutoService {
     }
 
     public Page<ProdutoResponseDTO> listar(String nome, String categoria, Pageable pageable) {
-        // TODO: Implementar
-        return Page.empty();
-    }
+          // Por enquanto ignoramos nome/categoria – retornamos tudo paginado.
+          return produtoRepository.findAll(pageable)
+                  .map(this::toResponseDTO);
+      }
 
     public ProdutoResponseDTO buscarPorId(Long id) {
         // TODO: Implementar
