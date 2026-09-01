@@ -70,3 +70,63 @@ https://docs.google.com/document/d/16ZrPXURQfLCX1YMhJkyjJQRCDnOd6EhwkVabb6KKCJs/
 * O **Backend** validará os dados recebidos antes da execução das regras de negócio.
 * As respostas da API seguirão o padrão **JSON**.
 * As mensagens de erro serão padronizadas para facilitar o tratamento e a apresentação das informações no frontend.
+
+  ✅ Estrutura Completa Criada
+
+      backend/
+      ├── pom.xml                                    # Maven config (Spring Boot 3.3.2, Java 21)
+      ├── src/main/
+      │   ├── java/com/estoque/
+      │   │   ├── SistemaEstoqueApplication.java     # Classe principal
+      │   │   ├── controller/
+      │   │   │   ├── ProdutoController.java         # GET/POST/PUT/DELETE /api/produtos
+      │   │   │   └── MovimentacaoController.java    # POST/GET /api/movimentacoes
+      │   │   ├── dto/
+      │   │   │   ├── ProdutoRequestDTO.java         # Validação @NotBlank, @Size, @Min
+      │   │   │   ├── ProdutoResponseDTO.java
+      │   │   │   ├── MovimentacaoRequestDTO.java    # Validação @NotNull, @Min(1)
+      │   │   │   └── MovimentacaoResponseDTO.java
+      │   │   ├── entity/
+      │   │   │   ├── Produto.java                   # JPA Entity
+      │   │   │   ├── Movimentacao.java              # JPA Entity
+      │   │   │   └── TipoMovimentacao.java          # Enum ENTRADA/SAIDA
+      │   │   ├── repository/
+      │   │   │   ├── ProdutoRepository.java         # JpaRepository
+      │   │   │   └── MovimentacaoRepository.java    # JpaRepository
+      │   │   ├── service/
+      │   │   │   ├── ProdutoService.java            # Interface + impl dummy
+      │   │   │   ├── MovimentacaoService.java       # Interface
+      │   │   │   └── MovimentacaoServiceImpl.java   # Implementação com TODO + dummy
+      │   │   └── exception/
+      │   │       ├── BusinessException.java         # Exceção de negócio
+      │   │       └── GlobalExceptionHandler.java    # @RestControllerAdvice (400, 422, 404, 500)
+      │   └── resources/
+      │       └── application.yml                    # H2 in-memory, porta 8080, context-path /api
+
+    ────────────────────────────────────
+
+    🔑 Endpoints Prontos (com validação DTO ativada via @Valid)
+
+      Método  Rota                     Descrição
+      ──────  ───────────────────────  ────────────────────────────────────────────────────────
+      POST    /api/produtos            Criar produto (valida nome, categoria, qtd ≥ 0)
+      GET     /api/produtos            Listar paginado (filtros: ?nome=&categoria=)
+      GET     /api/produtos/{id}       Buscar por ID
+      PUT     /api/produtos/{id}       Atualizar
+      DELETE  /api/produtos/{id}       Deletar
+      POST    /api/movimentacoes       Registrar movimentação (valida produtoId, tipo, qtd ≥ 1)
+      GET     /api/movimentacoes       Listar todas
+      GET     /api/movimentacoes/{id}  Buscar por ID
+
+    ────────────────────────────────────
+
+    🚀 Como Rodar
+
+      ─ bash
+      cd ~/Projetos/github/estudos/sistemaestoque/backend
+      source /etc/profile  # ou reinicie o terminal
+      mvn spring-boot:run
+
+    A API sobe em: http://localhost:8080/api/...
+    H2 Console: http://localhost:8080/h2-console (JDBC URL: jdbc:h2:mem:estoque)
+
